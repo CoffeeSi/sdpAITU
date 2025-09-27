@@ -1,4 +1,4 @@
-public interface Application {
+public interface IApplication {
     void open();
     void delete();
 }
