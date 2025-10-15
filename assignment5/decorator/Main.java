@@ -1,22 +1,25 @@
 package decorator;
 
 public class Main {
+    public static void printInfo(IPerson person) {
+        System.out.println("Fullname: " + person.getFullname());
+        System.out.println("Roles: " + person.getRoles());
+        System.out.println("Permissions: " + person.getPermissions());
+    }
+
     public static void main(String[] args) {
         IPerson student = new StudentDecorator(new BasePerson("Yevgeniy"));
-        System.out.println("Fullname: " + student.getFullname());
-        System.out.println("Roles: " + student.getRoles());
-        System.out.println("Permissions: " + student.getPermissions());
+        printInfo(student);
 
         IPerson teacher = new TeacherDecorator(new BasePerson("Dias"));
-        System.out.println("Fullname: " + teacher.getFullname());
-        System.out.println("Roles: " + teacher.getRoles());
-        System.out.println("Permissions: " + teacher.getPermissions());
+        printInfo(teacher);
+
+        IPerson headTeacher = new TeacherDecorator(new PrivilegedPerson("Denis"));
+        printInfo(headTeacher);
 
         IPerson studentTeacher = new StudentDecorator(
                                     new TeacherDecorator(
                                         new BasePerson("Arlan")));
-        System.out.println("Fullname: " + studentTeacher.getFullname());
-        System.out.println("Roles: " + studentTeacher.getRoles());
-        System.out.println("Permissions: " + studentTeacher.getPermissions());
+        printInfo(studentTeacher);
     }
 }
